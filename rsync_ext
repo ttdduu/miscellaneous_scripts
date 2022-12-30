@@ -1,0 +1,2 @@
+rsync -av $HOME/pdfs/ $external_drive/home
+rsync -av $HOME/FCEyN/ $external_drive/home
