@@ -1,6 +1,6 @@
 #!/bin/bash
 
-external_monitor=DP1
+external_monitor=HDMI1
 main_monitor=eDP1
 
 pen_id=$( xsetwacom list devices | cut -d : -f 2 | cut -d ' ' -f 2 | cut -c 1-2 | cut -d ' ' -f 2 | cut -d$'\n' -f 1
