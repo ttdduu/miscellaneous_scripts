@@ -38,7 +38,7 @@ then
 	xsetwacom set $eraser_id MapToOutput 2189x1459+0+0
 	#son 2736x1824 multiplicados por el scale que
 	#pongo en bsprc
-	feh --bg-fill ~/Pictures/bosque_sur.jpg
+	feh --bg-fill ~/media/Pictures/bosque_sur.jpg
 fi
 
 if [ $1 = on ]
@@ -54,5 +54,5 @@ then
   # Remove "Desktop" created by bspwm
   	bspc desktop Desktop --remove
 
-	feh --bg-fill ~/Pictures/bosque_sur.jpg
+	feh --bg-fill ~/media/Pictures/bosque_sur.jpg
  fi
