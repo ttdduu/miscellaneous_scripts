@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+st -e sudo mount /dev/sda1 /home/tdu/external_drives/ext4
+st -e vifm /home/tdu/external_drives/ext4

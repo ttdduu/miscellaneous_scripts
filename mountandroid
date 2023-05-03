@@ -1,0 +1,4 @@
+#!/usr/bin/zsh
+mkdir usb
+go-mtpfs external_drives/android &
+st -e vifm external_drives/android

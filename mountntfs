@@ -1,0 +1,2 @@
+#!/usr/bin/zsh
+st -e sudo mount -t auto /dev/sdb1 /home/tdu/external_drives/ntfs/ && vifm /home/tdu/external_drives/ntfs/

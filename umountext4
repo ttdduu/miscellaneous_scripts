@@ -1,0 +1,2 @@
+#!/usr/bin/zsh
+st -e sudo umount /home/tdu/external_drives/ext4/

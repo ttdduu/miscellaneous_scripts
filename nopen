@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import argparse,sys,os
+
+parser=argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--dir',default='fsn',help='qué querés abrir')
+parser.add_argument('--n',default=1,help='cuántas veces lo querés abrir')
+
+args=parser.parse_args()
+
+for i in range(int(args.n)):
+    # os.system(f'st -e zsh -c {args.dir} vifm --select &')
+    # # os.system(f'st -e cd {args.dir} && zsh -c vifm &')
+    os.chdir(args.dir)
+    os.system('st -e zsh -c vifm &')
+
