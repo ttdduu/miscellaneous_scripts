@@ -1,3 +1,21 @@
 #!/usr/bin/zsh
-st -e sudo mount /dev/sda1 /home/tdu/external_drives/ext4
-st -e vifm /home/tdu/external_drives/ext4
+
+# Define the directories to check
+directories=(/dev/sda1 /dev/sda2 /dev/sdb1 /dev/sdb2)
+
+# Loop through the directories
+for directory in "${directories[@]}"
+do
+  # Check if the directory is not empty
+  if [ "$(ls -A "$directory")" ]
+  then
+    # Mount the directory and open it in vifm
+	st -e sudo mount "$directory" /home/tdu/external_drives/ext4
+	st -e vifm /home/tdu/external_drives/ext4
+    exit 0
+  fi
+done
+
+# If none of the directories were not empty, print an error message and exit with an error code
+echo "Error: none of the directories were not empty"
+exit 1
