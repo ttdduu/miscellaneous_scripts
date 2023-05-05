@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 # Define the directories to check
-directories=(/dev/sda1 /dev/sda2 /dev/sdb1 /dev/sdb2)
+directories=(/dev/sda1 /dev/sda2 /dev/sdb1 /dev/sdb2 /dev/sdc1 /dev/sdd1)
 
 # Loop through the directories
 for directory in "${directories[@]}"
@@ -10,7 +10,8 @@ do
   if [ "$(ls -A "$directory")" ]
   then
     # Mount the directory and open it in vifm
-    st -e sudo mount -t auto "$directory" /home/tdu/external_drives/ntfs/ && vifm /home/tdu/external_drives/ntfs/
+    #st -e sudo mount -t auto "$directory" /home/tdu/external_drives/ntfs/ && vifm /home/tdu/external_drives/ntfs/
+    st -e sudo ntfs-3g "$directory" /home/tdu/external_drives/ntfs/ && vifm /home/tdu/external_drives/ntfs/
     exit 0
   fi
 done
