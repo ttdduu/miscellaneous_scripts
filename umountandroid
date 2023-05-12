@@ -1,2 +1,2 @@
 #!/usr/bin/zsh
-fusermount -u usb
+fusermount -u /home/tdu/external_drives/android
