@@ -8,7 +8,7 @@ pen_id=$( xsetwacom list devices | cut -d : -f 2 | cut -d ' ' -f 2 | cut -c 1-2 
 eraser_id=$( xsetwacom list devices | cut -d : -f 2 | cut -d ' ' -f 2 | cut -c 1-2 | cut -d ' ' -f 2 | cut -d$'\n' -f 2
 )
 
-if [ $1 = off ]
+if [[ $1 = off ]]
 then
 
 	bspc monitor $main_monitor -a Desktop # Temp desktop because one desktop required per monitor
@@ -41,7 +41,7 @@ then
 	feh --bg-fill ~/media/Pictures/bosque_sur.jpg
 fi
 
-if [ $1 = on ]
+if [[ $1 = on ]]
 then
 
 	desktops=5 # How many desktops to move to the second monitor
