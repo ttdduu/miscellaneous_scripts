@@ -15,4 +15,9 @@ if [[ $(xrandr -q | grep 'HDMI1 connected 1920') ]]; then
 	xsetwacom set $eraser_id MapToOutput 1920x1296+0+0
 fi
 
-xournalpp $1
+if [ $# -eq 0 ]; then
+	cp $HOME/TEMPLATE_XOURNALPIPI_DEJALO_INTACTO.xopp $HOME/newxopp.xopp
+	xournalpp $HOME/newxopp.xopp
+else
+	xournalpp $1
+fi
