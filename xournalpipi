@@ -2,21 +2,20 @@
 
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1003/bus
 
+pen_id=$( xsetwacom list devices | cut -d : -f 2 | cut -d ' ' -f 2 | cut -c 1-2 | cut -d ' ' -f 2 | cut -d$'\n' -f 1
+)
+eraser_id=$( xsetwacom list devices | cut -d : -f 2 | cut -d ' ' -f 2 | cut -c 1-2 | cut -d ' ' -f 2 | cut -d$'\n' -f 2
+)
+
+
 if [[ $(xrandr -q | grep 'HDMI1 connected 1920') ]]; then
-#	xsetwacom set 9 MapToOutput 1920x1296+0+0
-#	xsetwacom set 14 MapToOutput 1920x1296+0+0
-#	xsetwacom set xsetwacom list devices | cut -d : -f 2 | cut -d   -f 2 | cut -c 1-2
-	pen_id=$( xsetwacom list devices | cut -d : -f 2 | cut -d ' ' -f 2 | cut -c 1-2 | cut -d ' ' -f 2 | cut -d$'\n' -f 1
-)
-	eraser_id=$( xsetwacom list devices | cut -d : -f 2 | cut -d ' ' -f 2 | cut -c 1-2 | cut -d ' ' -f 2 | cut -d$'\n' -f 2
-)
 
 	xsetwacom set $pen_id MapToOutput 1920x1296+0+0
 	xsetwacom set $eraser_id MapToOutput 1920x1296+0+0
 fi
 
 if [ $# -eq 0 ]; then
-	cp $HOME/TEMPLATE_XOURNALPIPI_DEJALO_INTACTO.xopp $HOME/newxopp.xopp
+	cp $HOME/TEMPLATE_XOURNALPIPI-DEJALO_INTACTO.xopp $HOME/newxopp.xopp
 	xournalpp $HOME/newxopp.xopp
 else
 	xournalpp $1

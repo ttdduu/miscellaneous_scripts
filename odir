@@ -4,4 +4,6 @@
 #st -e vifm --select $(fzf -e)
 #st -e fzf | vifm --select &
 #st -e fzf | xargs -I {} vifm --select {}
+
 st -e zsh -c 'cd // && vifm --select "$(fzf -e)"' &
+
