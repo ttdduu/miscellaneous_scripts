@@ -1,2 +1,2 @@
 #!/usr/bin/zsh
-rsync -av $HOME/pdfs/ $external_drive/pdfs
+rsync -av $1 $external_drive/$2
