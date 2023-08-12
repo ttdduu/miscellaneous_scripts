@@ -1,0 +1,14 @@
+#!/usr/bin/zsh
+
+# Assign the command output to an array using a loop
+common_files=()
+while IFS= read -r line; do
+    common_files+=("$line")
+done < <(comm -12 <(ls $1/) <(ls $2/))
+
+# Loop through common files and create hard links
+for file in "${common_files[@]}"; do
+	rm "$2/$file"
+	ln "$1/$file" "$2/$file"
+	#echo $file
+done
