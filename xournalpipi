@@ -15,7 +15,7 @@ if [[ $(xrandr -q | grep 'HDMI1 connected 1920') ]]; then
 fi
 
 if [ $# -eq 0 ]; then
-	cp $HOME/TEMPLATE_XOURNALPIPI-DEJALO_INTACTO.xopp $HOME/newxopp.xopp
+	cp $HOME/TEMPLATE_XOURNALPIPI_DEJALO_INTACTO.xopp $HOME/newxopp.xopp
 	xournalpp $HOME/newxopp.xopp
 else
 	xournalpp $1

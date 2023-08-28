@@ -5,7 +5,7 @@
 
 minutes=$(echo "" | dmenu -p "Enter the number of minutes:")
 ## Run the timer script inside swallow.sh to hide the terminal
-python3 /home/tdu/code/misc/timer.py "$minutes"
+python3 /home/ttdduu/code/misc/temporizador.py "$minutes"
 ## Get the PID of the last background process
 #terminal_pid=$!
 #
