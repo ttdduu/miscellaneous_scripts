@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Define the mount point
+MOUNT_POINT="/home/ttdduu/external_drives/sd"
+
+# Find the first available USB storage device's partition
+PARTITION=$(lsblk -o NAME,TYPE | grep 'part' | awk '{print $1}' | head -n 1 | sed 's/[^a-z0-9A-Z]*//g')
+
+# Check if a device is already mounted
+if mountpoint -q "$MOUNT_POINT"; then
+    echo "A device is already mounted at $MOUNT_POINT."
+else
+    # Mount the partition if found
+    if [[ -n "$PARTITION" ]]; then
+        DEVICE_PATH="/dev/$PARTITION"
+        st -e sudo mount "$DEVICE_PATH" "$MOUNT_POINT" && echo "Partition $DEVICE_PATH mounted at $MOUNT_POINT."
+		st -e vifm $MOUNT_POINT
+    else
+        st -e echo "No available USB storage device found."
+    fi
+fi
+

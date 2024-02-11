@@ -1,0 +1,6 @@
+#!/usr/bin/zsh
+
+
+article=$(echo "" | dmenu -p "pegá el artículo de medium")
+## Run the timer script inside swallow.sh to hide the terminal
+st -e "sw google-chrome http://webcache.googleusercontent.com/search?q=cache:$article"

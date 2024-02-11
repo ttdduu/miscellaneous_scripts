@@ -1,8 +1,8 @@
 #!/usr/bin/zsh
 #mkdir usb
-go-mtpfs external_drives/android &
-st -e vifm external_drives/android
+go-mtpfs /home/ttdduu/external_drives/android &
+st -e vifm /home/ttdduu/external_drives/android
 #export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1003/bus
 #nautilus
 #pkill nautilus
-#st -e vifm /run/user/1000/gvfs/mtp:host=Xiaomi_TRINKET-IDP__SN%3A95D39118_1015d472
+#st -e vifm /run/user/1000/gvfs/mtp:host=SAMSUNG_SAMSUNG_Android_ce0917197d3ab63904
