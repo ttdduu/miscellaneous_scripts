@@ -1,0 +1,4 @@
+#!/usr/bin/zsh
+
+# el que anda perfecto
+$HOME/sioyek/build/sioyek $1 --new-window --page $2

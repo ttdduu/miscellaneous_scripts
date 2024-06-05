@@ -1,4 +1,4 @@
 #!/usr/bin/zsh
 
 # para backupear un dir que está en $external_drive/ me paro dentro del dir y hago backup_ext %d (si estoy en vifm)
-rsync -av $1 $external_drive/
+rsync -av $1 $sd/

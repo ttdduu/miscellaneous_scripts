@@ -14,6 +14,7 @@ else
     if [[ -n "$PARTITION" ]]; then
         DEVICE_PATH="/dev/$PARTITION"
         st -e sudo mount "$DEVICE_PATH" "$MOUNT_POINT" && echo "Partition $DEVICE_PATH mounted at $MOUNT_POINT."
+		sudo chown -R ttdduu:ttdduu $MOUNT_POINT
 		st -e vifm $MOUNT_POINT
     else
         st -e echo "No available USB storage device found."

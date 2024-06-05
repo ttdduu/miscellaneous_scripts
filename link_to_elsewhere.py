@@ -1,7 +1,9 @@
-#!/home/ttdduu/miniconda3/envs/pytom/bin/python3
+#!/home/ttdduu/miniconda3/envs/pytom-sioyek/bin/python3
 
 import pyperclip
 import os
+import re
+import subprocess
 
 link_entero = pyperclip.paste()
 
@@ -17,37 +19,70 @@ def to_wiki():
 
 
 def to_vifm():
-    file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    if "|" in link_entero:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    elif "[" in link_entero:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
+    else:
+        file = link_entero
 
     os.system(f"st -e vifm --select {file}")
 
 
 def to_pdf():
-    file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    if "|" in link_entero:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    else:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
 
-    os.system(f"st -e sw okular {file}")
+    if " " in file:  # si metí params en el [[$papers/... x y z]]
+        # Regex pattern splits on substrings "; " and ", "
+        splits = re.split(" |\|", file)
+
+        name = splits[0]
+        page = splits[1]
+        search = splits[2]
+        print(name)
+        print(page)
+        print(search)
+        os.system(f"siokex {name} {page} {search}")
+
+    else:
+        os.system(f"st -e sw siok {file}")
 
 
 def to_libre():
-    file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    if "|" in link_entero:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    else:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
 
     os.system(f"st -e libreof {file}")
 
 
 def to_chrome():
-    file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    if "|" in link_entero:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    else:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
 
     os.system(f'st -e sw google-chrome "{file}"')
 
 
 def to_vlc():
-    file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    if "|" in link_entero:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    else:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
 
     os.system(f"st -e sw vlc {file}")
 
 
 def to_sxiv():
-    file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    if "|" in link_entero:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+    else:
+        file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
 
     os.system(f"st -e sw sxiv {file}")
 
@@ -55,13 +90,27 @@ def to_sxiv():
 def to_praat():
     file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
     if " " in file:
-        os.system(f"st -e sw praat --send $lsd/tesis/praat_vim.praat {file}")
+        os.system(f"st -e sw praat --send $lsd/tesislab/praat_vim.praat {file}")
     else:
         os.system(f"st -e sw praat --open {file}")
 
 
+def to_sioyek():
+    search = str(link_entero[1 : link_entero.find("_", 1)])
+    params = link_entero[link_entero.find("_", 1) + 2 :].split(".")[0]
+    page, name = params.split(" ")
+    page = int(page[:-1]) + 1
+    name = name + ".pdf"
+
+    os.system(f'siokex {name} {page} "{search}"')
+
+
 if "#" in link_entero:
     to_wiki()
+
+if ".wiki" in link_entero:
+    if "#" not in link_entero:
+        to_sioyek()
 
 if ".pdf" in link_entero:
     to_pdf()
