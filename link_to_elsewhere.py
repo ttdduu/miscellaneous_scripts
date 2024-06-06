@@ -95,22 +95,45 @@ def to_praat():
         os.system(f"st -e sw praat --open {file}")
 
 
-def to_sioyek():
-    search = str(link_entero[1 : link_entero.find("_", 1)])
-    params = link_entero[link_entero.find("_", 1) + 2 :].split(".")[0]
-    page, name = params.split(" ")
-    page = int(page[:-1]) + 1
-    name = name + ".pdf"
+def to_sioyek(page=True):
+    if page:
+        """
+        para líneas de texto tipo '_quote del texto_ pagenumber'
+
+        """
+        search = str(link_entero[1 : link_entero.find("_", 1)])
+        params = link_entero[link_entero.find("_", 1) + 2 :].split(".")[0]
+        page, name = params.split(" ")
+        page = int(page[:-1]) + 1
+        name = name + ".pdf"
+    if page == False:
+        """
+        para líneas de texto 'Full Title: _cortical connections blabla_ filename.wiki'
+        """
+        start_search = link_entero.find("_", 0)
+        end_search = link_entero.find("_", start_search + 1)  # arranca a buscar desde 1
+        search = str(link_entero[start_search + 1 : end_search])
+        page = 1
+        name = (
+            link_entero[end_search + 2 : link_entero.find(".", end_search + 2)] + ".pdf"
+        )
+        print(name)
+        print(page)
+        print(search)
 
     os.system(f'siokex {name} {page} "{search}"')
 
 
-if "#" in link_entero:
-    to_wiki()
+# if "#" in link_entero:
+# to_wiki()
 
+"con N en vim tengo _search_ page name; name es el .wiki en el que estoy"
 if ".wiki" in link_entero:
     if "#" not in link_entero:
-        to_sioyek()
+        if link_entero[0] != "_":
+            to_sioyek(page=False)
+        else:
+            to_sioyek()
 
 if ".pdf" in link_entero:
     to_pdf()
