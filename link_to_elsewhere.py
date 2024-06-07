@@ -1,4 +1,4 @@
-#!/home/ttdduu/miniconda3/envs/pytom-sioyek/bin/python3
+#!/home/ttdduu/miniconda3/envs/pytom/bin/python3
 
 import pyperclip
 import os
@@ -45,10 +45,10 @@ def to_pdf():
         print(name)
         print(page)
         print(search)
-        os.system(f"siokex {name} {page} {search}")
+        os.system(f"sioyex {name} {page} {search}")
 
     else:
-        os.system(f"st -e sw siok {file}")
+        os.system(f"st -e sw sioy {file}")
 
 
 def to_libre():
@@ -121,7 +121,7 @@ def to_sioyek(page=True):
         print(page)
         print(search)
 
-    os.system(f'siokex {name} {page} "{search}"')
+    os.system(f'sioyex {name} {page} "{search}"')
 
 
 # if "#" in link_entero:

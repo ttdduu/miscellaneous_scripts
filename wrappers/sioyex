@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
 # lo que anda perfecto:
-siok $1 $2  &
+sioy $1 $2  &
 sleep 0.2
 $HOME/sioyek/build/sioyek --execute-command search --execute-command-data "$3"
