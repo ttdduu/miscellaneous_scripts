@@ -29,7 +29,7 @@ def to_vifm():
     os.system(f"st -e vifm --select {file}")
 
 
-def to_pdf():
+def to_pdf():  # para los linkeados [[$papers/bla.pdf params|así]]
     if "|" in link_entero:
         file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
     else:
@@ -98,13 +98,25 @@ def to_praat():
 def to_sioyek(page=True):
     if page:
         """
-        para líneas de texto tipo '_quote del texto_ pagenumber'
+        para líneas de texto tipo _quote del texto_ pagenumber
 
         """
         search = str(link_entero[1 : link_entero.find("_", 1)])
         params = link_entero[link_entero.find("_", 1) + 2 :].split(".")[0]
-        page, name = params.split(" ")
-        page = int(page[:-1]) + 1
+        # después de pagenumber quizá metí más texto para explicar o whatever; no me
+        # interesa para esto.
+        """
+        osea puedo tener una estructura como esta:
+
+        blabla _quote del df_ 134 por ende blablabla
+
+        y que ande bien! xq al final de eso le appendeo el filename y lo único que
+        quiero es el 1er elemento de params (el nro) y el último (el filename).
+        lo imp es parar el cursor dentro de la quote que quiero, menos mal.
+        En particular porque ahora puedo tener más de una quote en misma línea.
+        """
+        page, name = params.split(" ")[0], params.split(" ")[-1]
+        page = int(page) + 1
         name = name + ".pdf"
     if page == False:
         """
