@@ -97,12 +97,13 @@ def to_praat():
 
 def to_sioyek(page=True):
     if page:
+        print("AAAAAAAAAAAAAAAAAA")
         """
         para líneas de texto tipo _quote del texto_ pagenumber
 
         """
         search = str(link_entero[1 : link_entero.find("_", 1)])
-        params = link_entero[link_entero.find("_", 1) + 3 :].split(".")[0]
+        params = link_entero[link_entero.find("_", 1) + 2 :].split(".")[0]
         # después de pagenumber quizá metí más texto para explicar o whatever; no me
         # interesa para esto.
         """
@@ -142,7 +143,8 @@ def to_sioyek(page=True):
 if ".wiki" in link_entero:
     if "#" not in link_entero:
         index_post_search = link_entero.find("_", 1) + 3
-        if link_entero[index_post_search].isdigit():
+        print(link_entero[index_post_search - 1])
+        if link_entero[index_post_search - 1].isdigit():
             # if link_entero[0] != "_":
             to_sioyek()
         else:
