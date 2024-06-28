@@ -8,7 +8,7 @@ repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
 
 # Repository to pull updates from
 neovim_repo="/home/ttdduu/.config/neovim"
-branch="v0.10.0"
+branch="HEAD"
 
 # Function to add, commit, and push changes if there are uncommitted changes
 function commit_and_push {
