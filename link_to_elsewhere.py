@@ -42,9 +42,6 @@ def to_pdf():  # para los linkeados [[$papers/bla.pdf params|así]]
         name = splits[0]
         page = splits[1]
         search = splits[2]
-        print(name)
-        print(page)
-        print(search)
         os.system(f"sioyex {name} {page} {search}")
 
     else:
@@ -95,15 +92,23 @@ def to_praat():
         os.system(f"st -e sw praat --open {file}")
 
 
+def session():
+    file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
+    os.system(f"st -e nvim -S {file}")
+
+
 def to_sioyek(page=True):
     if page:
-        print("AAAAAAAAAAAAAAAAAA")
         """
         para líneas de texto tipo _quote del texto_ pagenumber
 
         """
+        print(link_entero)
         search = str(link_entero[1 : link_entero.find("_", 1)])
-        params = link_entero[link_entero.find("_", 1) + 2 :].split(".")[0]
+        # params = link_entero[link_entero.find("_", 1) + 2 :].split(".")[0]
+        # los últimos 5 caracteres son el ".wiki" que se agrega a la quote + pagenumber
+        # en vim
+        params = link_entero[link_entero.find("_", 1) + 2 : -5]
         # después de pagenumber quizá metí más texto para explicar o whatever; no me
         # interesa para esto.
         """
@@ -117,11 +122,12 @@ def to_sioyek(page=True):
         En particular porque ahora puedo tener más de una quote en misma línea.
         """
         page, name = params.split(" ")[0], params.split(" ")[-1]
-        # print(page)
+        print(params)
         page = int(page) + 1
         name = name + ".pdf"
         print(page)
         print(name)
+        print(search)
     if page == False:
         """
         para líneas de texto 'Full Title: _cortical connections blabla_ filename.wiki'
@@ -140,26 +146,29 @@ def to_sioyek(page=True):
 # to_wiki()
 
 "con N en vim tengo _search_ page name; name es el .wiki en el que estoy"
-if ".wiki" in link_entero:
-    if "#" not in link_entero:
-        index_post_search = link_entero.find("_", 1) + 3
-        print(link_entero[index_post_search - 1])
-        if link_entero[index_post_search - 1].isdigit():
-            # if link_entero[0] != "_":
-            to_sioyek()
-        else:
-            to_sioyek(page=False)
+if ".wiki" in link_entero[-5:]:
+    print("AAAAAAAA")
+    index_post_search = link_entero.find("_", 1) + 3
+    if link_entero[index_post_search - 1].isdigit():
+        # if link_entero[0] != "_":
+        to_sioyek()
+    else:
+        to_sioyek(page=False)
 
 if ".pdf" in link_entero:
     to_pdf()
 
-if "https:" in link_entero:
+if ".mks" in link_entero:
+    session()
+
+# TODO problemas cuando en _quote_ pagenumber [[link]] hay un [[link]] en la línea
+if "https:" in link_entero and "[[" in link_entero[:2]:
     to_chrome()
 
-if ".com" in link_entero:
+if ".com" in link_entero and "[[" in link_entero[:2]:
     to_chrome()
 
-if "www." in link_entero:
+if "www." in link_entero and "[[" in link_entero[:2]:
     to_chrome()
 
 if ".mp3" in link_entero:
