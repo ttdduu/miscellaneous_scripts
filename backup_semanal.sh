@@ -46,14 +46,15 @@ done
 # Pull latest updates from Neovim repository
 echo "Pulling latest updates from Neovim repository..."
 cd "$neovim_repo" || { echo "Failed to change directory to $neovim_repo"; exit 1; }
-git fetch origin main # Adjust the branch name if necessary
+branch = "v0.10.0"
+git fetch origin $branch # Adjust the branch name if necessary
 
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse @{u})
 
 if [ $LOCAL != $REMOTE ]; then
   echo "New changes found. Pulling latest updates..."
-  git pull origin main # Adjust the branch name if necessary
+  git pull origin $branch # Adjust the branch name if necessary
 
   # Compile Neovim
   echo "Compiling Neovim..."
