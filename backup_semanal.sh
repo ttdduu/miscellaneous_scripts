@@ -8,6 +8,7 @@ repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
 
 # Repository to pull updates from
 neovim_repo="/home/ttdduu/.config/neovim"
+branch="v0.10.0"
 
 # Function to add, commit, and push changes if there are uncommitted changes
 function commit_and_push {
@@ -46,7 +47,6 @@ done
 # Pull latest updates from Neovim repository
 echo "Pulling latest updates from Neovim repository..."
 cd "$neovim_repo" || { echo "Failed to change directory to $neovim_repo"; exit 1; }
-branch = "v0.10.0"
 git fetch origin $branch # Adjust the branch name if necessary
 
 LOCAL=$(git rev-parse @)
