@@ -6,10 +6,6 @@ commit_message="Automatic weekly commit message"
 # List of repositories
 repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
 
-# Repository to pull updates from
-neovim_repo="/home/ttdduu/.config/neovim"
-branch="HEAD"
-
 # Function to add, commit, and push changes if there are uncommitted changes
 function commit_and_push {
   local repo=$1
@@ -44,25 +40,35 @@ do
   commit_and_push "$repo"
 done
 
-# Pull latest updates from Neovim repository
-echo "Pulling latest updates from Neovim repository..."
-cd "$neovim_repo" || { echo "Failed to change directory to $neovim_repo"; exit 1; }
-git fetch origin $branch # Adjust the branch name if necessary
-
-LOCAL=$(git rev-parse @)
-REMOTE=$(git rev-parse @{u})
-
-if [ $LOCAL != $REMOTE ]; then
-  echo "New changes found. Pulling latest updates..."
-  git pull origin $branch # Adjust the branch name if necessary
-
-  # Compile Neovim
-  echo "Compiling Neovim..."
-  make CMAKE_BUILD_TYPE=Release
+if [ -z "$(ls -A "$sd")" ]; then
+	echo "Directory is empty"
 else
-  echo "No new changes found."
+	rsync -av $HOME/wiki $sd/
 fi
 
-echo "Done."
-
 dropbox start
+
+# Repository to pull updates from
+# neovim_repo="/home/ttdduu/.config/neovim"
+# branch="HEAD"
+#
+# # Pull latest updates from Neovim repository
+# echo "Pulling latest updates from Neovim repository..."
+# cd "$neovim_repo" || { echo "Failed to change directory to $neovim_repo"; exit 1; }
+# git fetch origin $branch # Adjust the branch name if necessary
+#
+# LOCAL=$(git rev-parse @)
+# REMOTE=$(git rev-parse @{u})
+#
+# if [ $LOCAL != $REMOTE ]; then
+#   echo "New changes found. Pulling latest updates..."
+#   git pull origin $branch # Adjust the branch name if necessary
+#
+#   # Compile Neovim
+#   echo "Compiling Neovim..."
+#   make CMAKE_BUILD_TYPE=Release
+# else
+#   echo "No new changes found."
+# fi
+#
+# echo "Done."
