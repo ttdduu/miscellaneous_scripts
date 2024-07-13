@@ -46,6 +46,8 @@ else
 	rsync -av $HOME/wiki $sd/
 fi
 
+nvim --headless +PlugUpdate +qall
+
 dropbox start
 
 # Repository to pull updates from

@@ -45,7 +45,7 @@ def to_pdf():  # para los linkeados [[$papers/bla.pdf params|así]]
         os.system(f"sioyex {name} {page} {search}")
 
     else:
-        os.system(f"st -e sw sioy {file}")
+        os.system(f"st -e sw sioy {file} {1}")
 
 
 def to_libre():
@@ -145,6 +145,7 @@ def to_sioyek(page=True):
 # if "#" in link_entero:
 # to_wiki()
 
+# to_sioyek es para ir desde un _quote_ que está dentro del .wiki del .pdf en cuestión
 "con N en vim tengo _search_ page name; name es el .wiki en el que estoy"
 if ".wiki" in link_entero[-5:]:
     print("AAAAAAAA")
@@ -155,6 +156,7 @@ if ".wiki" in link_entero[-5:]:
     else:
         to_sioyek(page=False)
 
+# para ir desde un [[*.pdf]] al pdf
 if ".pdf" in link_entero:
     to_pdf()
 
