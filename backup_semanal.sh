@@ -1,5 +1,7 @@
 #!/usr/bin/zsh
 
+history > /home/ttdduu/dotfiles/historial_bkp_semanal.txt
+
 # Define the commit message
 commit_message="Automatic weekly commit message"
 

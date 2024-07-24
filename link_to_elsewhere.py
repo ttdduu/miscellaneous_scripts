@@ -188,7 +188,7 @@ if ".wav" in link_entero:
 if ".docx" in link_entero:
     to_libre()
 
-if ".doc|" in link_entero:
+if ".doc" in link_entero:
     to_libre()
 
 if ".odt" in link_entero:
