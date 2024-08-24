@@ -2,6 +2,13 @@
 
 history > /home/ttdduu/dotfiles/historial_bkp_semanal.txt
 
+nvim --headless +PlugUpdate +qall
+
+dropbox start
+
+# {{{ repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
+
+
 # Define the commit message
 commit_message="Automatic weekly commit message"
 
@@ -41,16 +48,26 @@ for repo in "${repos[@]}"
 do
   commit_and_push "$repo"
 done
+# }}}
+
+# {{{ rsync a sd externo
+
+dirs_para_sd=(
+    "$HOME/wiki"
+    #"/path/to/yet/another/directory"
+    # Add more directories as needed
+)
 
 if [ -z "$(ls -A "$sd")" ]; then
 	echo "Directory is empty"
 else
-	rsync -av $HOME/wiki $sd/
+	for dir in "${dirs_para_sd[@]}"; do
+		rsync -av "$dir" "$sd/"
+	done
+	#rsync -av $HOME/wiki $sd/
 fi
 
-nvim --headless +PlugUpdate +qall
-
-dropbox start
+# }}}
 
 # Repository to pull updates from
 # neovim_repo="/home/ttdduu/.config/neovim"

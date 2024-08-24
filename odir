@@ -1,18 +1,43 @@
 #!/usr/bin/zsh
 
-#cd "$(dirname "$(find ./ -name "$1" -print -quit)")"
-#st -e vifm --select $(fzf -e)
-#st -e fzf | vifm --select &
-#st -e fzf | xargs -I {} vifm --select {}
-#pale() { [[ $(file --mime "$1") =~ text ]] && glow -p -w 100 -s dark "$1" || { [[ -d "$1" ]] && exa -1 --icons -TL 2 {}; } }
-#st -e zsh -c 'cd // && vifm --select "$(fzf -e --preview="cat\ {}")"' &
-#--preview 'zsh -e $(functions pale); pale {}'
+#start=$(echo "" | dmenu -p "en qué dir empezar:")
 
-start=$(echo "" | dmenu -p "en qué dir empezar:")
+#if [[ -n "$start" && -d "$start" ]]; then
+  #st -e zsh -c "cd \"$start\" && vifm --select \"\$(fzf -e --preview='cat {}')\""
+#else
+  #echo "Invalid directory or no directory selected"
+#fi
 
+
+# Prompt for input
+input=$(echo -e "ww\nhome\n" | dmenu -p "en qué dir empezar:")
+
+# Map input to directories
+case $input in
+    "ww")
+        start="/home/ttdduu/wiki"
+        ;;
+    "home")
+        start="/home/ttdduu"
+        ;;
+    "/")
+        start="//"
+        ;;
+esac
+
+# Check if ignoring dotfiles is selected
+#if [ "$start" == ".ignore dotfiles" ]; then
+    #input=$(ls -d /home/ttdduu/* | dmenu -p "Select a directory (ignoring dotfiles):")
+    #if [[ $input =~ ^/home/ttdduu/\. ]]; then
+        #start=""
+    #else
+        #start=$input
+    #fi
+#fi
+
+# Validate and execute the rest of the script
 if [[ -n "$start" && -d "$start" ]]; then
-  st -e zsh -c "cd \"$start\" && vifm --select \"\$(fzf -e --preview='cat {}')\""
-  #st -e zsh -c "cd \"$start\" && vifm --select \"\$(fzf -e --preview='nvim --headless --nofork --noplugin --cmd \"set nofile\" --cmd \"set buftype=nofile\" --cmd \"set syntax=on\" --cmd \"set background=dark\" -c \"silent! e {}\"')\""
+    st -e zsh -c "cd \"$start\" && vifm --select \"\$(fzf -e --preview='cat {}')\""
 else
-  echo "Invalid directory or no directory selected"
+    echo "Invalid directory or no directory selected"
 fi

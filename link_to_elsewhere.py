@@ -32,20 +32,33 @@ def to_vifm():
 def to_pdf():  # para los linkeados [[$papers/bla.pdf params|así]]
     if "|" in link_entero:
         file = link_entero[link_entero.find("[") + 2 : link_entero.find("|")]
+
+        if " " in file:  # si metí params en el [[$papers/... x y z]]
+            # Regex pattern splits on substrings "; " and ", "
+            splits = re.split(" |\|", file)
+
+            name = splits[0]
+            page = splits[1]
+            search = " ".join(splits[2:])
+            print(search)
+            os.system(f"sioyex {name} {page} {search}")
+
+        else:
+            os.system(f"st -e sw sioy {file} {1}")
     else:
         file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
 
-    if " " in file:  # si metí params en el [[$papers/... x y z]]
-        # Regex pattern splits on substrings "; " and ", "
-        splits = re.split(" |\|", file)
+        if " " in file:  # si metí params en el [[$papers/... x y z]]
+            # Regex pattern splits on substrings "; " and ", "
+            splits = re.split(" |\|", file)
 
-        name = splits[0]
-        page = splits[1]
-        search = splits[2]
-        os.system(f"sioyex {name} {page} {search}")
+            name = splits[0]
+            page = splits[1]
+            search = splits[2]
+            os.system(f"sioyex {name} {page} {search}")
 
-    else:
-        os.system(f"st -e sw sioy {file} {1}")
+        else:
+            os.system(f"st -e sw sioy {file} {1}")
 
 
 def to_libre():
@@ -147,7 +160,7 @@ def to_sioyek(page=True):
 
 # to_sioyek es para ir desde un _quote_ que está dentro del .wiki del .pdf en cuestión
 "con N en vim tengo _search_ page name; name es el .wiki en el que estoy"
-if ".wiki" in link_entero[-5:]:
+if ".md" in link_entero[-5:]:
     print("AAAAAAAA")
     index_post_search = link_entero.find("_", 1) + 3
     if link_entero[index_post_search - 1].isdigit():
