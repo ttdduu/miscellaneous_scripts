@@ -54,6 +54,8 @@ done
 
 dirs_para_sd=(
     "$HOME/wiki"
+    "$HOME/media"
+    "$HOME/pdfs"
     #"/path/to/yet/another/directory"
     # Add more directories as needed
 )
