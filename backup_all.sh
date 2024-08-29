@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-history > /home/ttdduu/dotfiles/historial_bkp_semanal.txt
+history -E > /home/ttdduu/dotfiles/historial_bkp_semanal.txt
 
 nvim --headless +PlugUpdate +qall
 
@@ -50,13 +50,13 @@ do
 done
 # }}}
 
-# {{{ rsync a sd externo
+# {{{ rsync a sd externo y tablet
 
 dirs_para_sd=(
     "$HOME/wiki"
     "$HOME/media"
     "$HOME/pdfs"
-    #"/path/to/yet/another/directory"
+	"$HOME/documentacion_y_burocracia"
     # Add more directories as needed
 )
 
@@ -68,6 +68,16 @@ else
 	done
 	#rsync -av $HOME/wiki $sd/
 fi
+
+# if [ -z "$(ls -A "$android")" ]; then
+# 	echo "Directory is empty"
+# else
+# 	rsync -av "$HOME/wiki" "$android/SD card/ACA/"
+# fi
+
+# adicional: documentacion y burocracia a dropbox. osea doc y buroc tiene upstream a sd y a dropbox; ambos no son más que copias y edito todo desde compu
+rsync -av "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
+
 
 # }}}
 
