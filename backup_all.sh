@@ -2,12 +2,15 @@
 
 history -E > /home/ttdduu/dotfiles/historial_bkp_semanal.txt
 
+echo "######################################### nvim plugins"
 nvim --headless +PlugUpdate +qall
 
 dropbox start
 
 # {{{ repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
 
+
+echo "######################################### repos"
 
 # Define the commit message
 commit_message="Automatic weekly commit message"
@@ -18,7 +21,7 @@ repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
 # Function to add, commit, and push changes if there are uncommitted changes
 function commit_and_push {
   local repo=$1
-  echo "Processing repository: $repo"
+  echo "######################################### Processing repository: $repo"
 
   # Change to the repository directory
   cd "$repo" || { echo "Failed to change directory to $repo"; return; }
@@ -47,6 +50,7 @@ function commit_and_push {
 for repo in "${repos[@]}"
 do
   commit_and_push "$repo"
+  echo "############################# commit $repo"
 done
 # }}}
 
@@ -64,6 +68,7 @@ if [ -z "$(ls -A "$sd")" ]; then
 	echo "Directory is empty"
 else
 	for dir in "${dirs_para_sd[@]}"; do
+		echo "######################################## rsync $dir a sd"
 		rsync -av "$dir" "$sd/"
 	done
 	#rsync -av $HOME/wiki $sd/
@@ -76,6 +81,7 @@ fi
 # fi
 
 # adicional: documentacion y burocracia a dropbox. osea doc y buroc tiene upstream a sd y a dropbox; ambos no son más que copias y edito todo desde compu
+echo "############################ documentacion y burocracia a dropbox"
 rsync -av "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
 
 
