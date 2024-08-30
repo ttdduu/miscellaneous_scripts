@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate tf_spherical
+jupyter-notebook

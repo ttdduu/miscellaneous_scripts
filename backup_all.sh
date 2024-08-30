@@ -50,7 +50,7 @@ function commit_and_push {
 for repo in "${repos[@]}"
 do
   commit_and_push "$repo"
-  echo "############################# commit $repo"
+  echo "######################################### commit $repo"
 done
 # }}}
 
@@ -65,10 +65,10 @@ dirs_para_sd=(
 )
 
 if [ -z "$(ls -A "$sd")" ]; then
-	echo "Directory is empty"
+	echo "el dir de sd está vacío"
 else
 	for dir in "${dirs_para_sd[@]}"; do
-		echo "######################################## rsync $dir a sd"
+		echo "######################################### rsync $dir a sd"
 		rsync -av "$dir" "$sd/"
 	done
 	#rsync -av $HOME/wiki $sd/
@@ -81,7 +81,7 @@ fi
 # fi
 
 # adicional: documentacion y burocracia a dropbox. osea doc y buroc tiene upstream a sd y a dropbox; ambos no son más que copias y edito todo desde compu
-echo "############################ documentacion y burocracia a dropbox"
+echo "######################################### documentacion y burocracia a dropbox"
 rsync -av "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
 
 
