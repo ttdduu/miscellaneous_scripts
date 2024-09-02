@@ -1,6 +1,7 @@
 #!/usr/bin/zsh
 
 history -E > /home/ttdduu/dotfiles/historial_bkp_semanal.txt
+echo 'history updated to /home/ttdduu/dotfiles/historial_bkp_semanal.txt'
 
 echo "######################################### nvim plugins"
 nvim --headless +PlugUpdate +qall

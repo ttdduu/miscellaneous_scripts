@@ -110,6 +110,11 @@ def session():
     os.system(f"st -e nvim -S {file}")
 
 
+def to_nvim():
+    file = link_entero[link_entero.find("[") + 2 : link_entero.find("]")]
+    os.system(f"st -e nvim {file}")
+
+
 def to_sioyek(page=True):
     if page:
         """
@@ -160,8 +165,7 @@ def to_sioyek(page=True):
 
 # to_sioyek es para ir desde un _quote_ que está dentro del .wiki del .pdf en cuestión
 "con N en vim tengo _search_ page name; name es el .wiki en el que estoy"
-if ".md" in link_entero[-5:]:
-    print("AAAAAAAA")
+if ".md" in link_entero[-3:] and link_entero[0] == "_":
     index_post_search = link_entero.find("_", 1) + 3
     if link_entero[index_post_search - 1].isdigit():
         # if link_entero[0] != "_":
@@ -175,6 +179,12 @@ if ".pdf" in link_entero:
 
 if ".mks" in link_entero:
     session()
+
+if "." not in link_entero[link_entero.rfind("/") + 1 :]:
+    to_vifm()
+
+if ".md" in link_entero and link_entero[0] != "_":
+    to_nvim()
 
 # TODO problemas cuando en _quote_ pagenumber [[link]] hay un [[link]] en la línea
 if "https:" in link_entero and "[[" in link_entero[:2]:
@@ -209,6 +219,3 @@ if ".odt" in link_entero:
 
 if ".png" in link_entero:
     to_sxiv()
-
-if "." not in link_entero[link_entero.rfind("/") + 1 :]:
-    to_vifm()
