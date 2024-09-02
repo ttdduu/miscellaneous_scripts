@@ -1,8 +1,7 @@
 #!/usr/bin/zsh
 
-HISTSIZE=999999999
-fc -R /home/ttdduu/dotfiles/historial_bkp_semanal.txt
-echo 'history updated to /home/ttdduu/dotfiles/historial_bkp_semanal.txt'
+fc -l > /home/ttdduu/dotfiles/historial_bkp_semanal.txt
+echo 'empezando backups'
 
 echo "######################################### nvim plugins"
 nvim --headless +PlugUpdate +qall
