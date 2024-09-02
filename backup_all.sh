@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-fc -l > /home/ttdduu/dotfiles/historial_bkp_semanal.txt
+cp ~/.zsh_history /home/ttdduu/dotfiles/historial_bkp_semanal.txt
 echo 'empezando backups'
 
 echo "######################################### nvim plugins"
@@ -70,7 +70,7 @@ if [ -z "$(ls -A "$sd")" ]; then
 else
 	for dir in "${dirs_para_sd[@]}"; do
 		echo "######################################### rsync $dir a sd"
-		rsync -av "$dir" "$sd/"
+		rsync -av --delete "$dir" "$sd/"
 	done
 	#rsync -av $HOME/wiki $sd/
 fi
@@ -83,7 +83,7 @@ fi
 
 # adicional: documentacion y burocracia a dropbox. osea doc y buroc tiene upstream a sd y a dropbox; ambos no son más que copias y edito todo desde compu
 echo "######################################### documentacion y burocracia a dropbox"
-rsync -av "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
+rsync -av --delete "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
 
 
 # }}}
