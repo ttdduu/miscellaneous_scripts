@@ -75,11 +75,12 @@ else
 	#rsync -av $HOME/wiki $sd/
 fi
 
-# if [ -z "$(ls -A "$android")" ]; then
-# 	echo "Directory is empty"
-# else
-# 	rsync -av "$HOME/wiki" "$android/SD card/ACA/"
-# fi
+ if [ -z "$(ls -A "$android")" ]; then
+	 echo "Directory is empty"
+ else
+	 echo "######################################### rsync wiki a tablet"
+	 rsync -av --delete "$HOME/wiki" "$android/SD card/ACA/"
+ fi
 
 # adicional: documentacion y burocracia a dropbox. osea doc y buroc tiene upstream a sd y a dropbox; ambos no son más que copias y edito todo desde compu
 echo "######################################### documentacion y burocracia a dropbox"

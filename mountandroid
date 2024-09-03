@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 #mkdir usb
 #go-mtpfs /home/ttdduu/external_drives/android &
-go-mtpfs -allow-other -allow-root /home/ttdduu/external_drives/android &
+go-mtpfs -allow-other /home/ttdduu/external_drives/android &
 st -e vifm /home/ttdduu/external_drives/android
 #export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1003/bus
 #nautilus
