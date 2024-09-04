@@ -1,10 +1,17 @@
 #!/usr/bin/zsh
 
+sudo apt update
+sudo apt upgrade
 cp ~/.zsh_history /home/ttdduu/dotfiles/historial_bkp_semanal.txt
 echo 'empezando backups'
 
 echo "######################################### nvim plugins"
 nvim --headless +PlugUpdate +qall
+
+# .vim a dotfiles
+echo "######################################### .vim a dotfiles"
+rsync -av "$HOME/.vim/my-snippets" "$HOME/dotfiles/home/.vim/"
+rsync -av "$HOME/.vim/autoload" "$HOME/dotfiles/home/.vim/"
 
 dropbox start
 
@@ -55,7 +62,7 @@ do
 done
 # }}}
 
-# {{{ rsync a sd externo y tablet
+# {{{ rsync a sd externo y tablet y a dotfiles
 
 dirs_para_sd=(
     "$HOME/wiki"
@@ -75,12 +82,12 @@ else
 	#rsync -av $HOME/wiki $sd/
 fi
 
- if [ -z "$(ls -A "$android")" ]; then
-	 echo "Directory is empty"
- else
-	 echo "######################################### rsync wiki a tablet"
-	 rsync -av --delete "$HOME/wiki" "$android/SD card/ACA/"
- fi
+if [ -z "$(ls -A "$android")" ]; then
+ echo "Directory is empty"
+else
+ echo "######################################### rsync wiki a tablet"
+ rsync -av --delete "$HOME/wiki" "$android/SD card/ACA/"
+fi
 
 # adicional: documentacion y burocracia a dropbox. osea doc y buroc tiene upstream a sd y a dropbox; ambos no son más que copias y edito todo desde compu
 echo "######################################### documentacion y burocracia a dropbox"
