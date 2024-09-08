@@ -62,7 +62,7 @@ do
 done
 # }}}
 
-# {{{ rsync a sd externo y tablet y a dotfiles
+# {{{ rsync a sd externo y tablet y iph y a dotfiles
 
 dirs_para_sd=(
     "$HOME/wiki"
@@ -77,7 +77,7 @@ if [ -z "$(ls -A "$sd")" ]; then
 else
 	for dir in "${dirs_para_sd[@]}"; do
 		echo "######################################### rsync $dir a sd"
-		rsync -av --delete "$dir" "$sd/"
+		rsync -av --delete --inplace "$dir" "$sd/"
 	done
 	#rsync -av $HOME/wiki $sd/
 fi
@@ -86,13 +86,20 @@ if [ -z "$(ls -A "$android")" ]; then
  echo "Directory is empty"
 else
  echo "######################################### rsync wiki a tablet"
- rsync -av --delete "$HOME/wiki" "$android/SD card/ACA/"
+ rsync -av --delete --inplace "$HOME/wiki" "$android/SD card/ACA"
+ rsync -av --delete --inplace "$HOME/french" "$android/SD card/ACA"
 fi
 
 # adicional: documentacion y burocracia a dropbox. osea doc y buroc tiene upstream a sd y a dropbox; ambos no son más que copias y edito todo desde compu
 echo "######################################### documentacion y burocracia a dropbox"
 rsync -av --delete "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
 
+if [ -z "$(ls -A "$iphone_apps")" ]; then
+ echo "iphone no está en /run/user/1000/gvfs/afc:host=00008101-000C69A93683001E,port=3/"
+else
+ echo "######################################### rsync french a iphone_apps vlc"
+ rsync -av --delete --inplace "$HOME/french" "$iphone_apps/org.videolan.vlc-ios/"
+fi
 
 # }}}
 

@@ -1,3 +1,3 @@
 #!/usr/bin/zsh
-fusermount -u /home/ttdduu/external_drives/android
+sudo fusermount -u "/home/ttdduu/external_drives/android"
 echo "éxito rotundo"
