@@ -15,7 +15,7 @@ rsync -av "$HOME/.vim/autoload" "$HOME/dotfiles/home/.vim/"
 
 dropbox start
 
-# {{{ repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
+# {{{ repos a gh=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
 
 
 echo "######################################### repos"
@@ -24,7 +24,7 @@ echo "######################################### repos"
 commit_message="Automatic weekly commit message"
 
 # List of repositories
-repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
+repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles" "/home/ttdduu/documentacion_y_burocracia" "/home/ttdduu/metaTODO")
 
 # Function to add, commit, and push changes if there are uncommitted changes
 function commit_and_push {
@@ -66,9 +66,9 @@ done
 
 dirs_para_sd=(
     "$HOME/wiki"
-    "$HOME/media"
+	"$HOME/media"
     "$HOME/pdfs"
-	"$HOME/documentacion_y_burocracia"
+	#"$HOME/documentacion_y_burocracia"
     # Add more directories as needed
 )
 
@@ -90,16 +90,19 @@ else
  rsync -av --delete --inplace "$HOME/french" "$android/SD card/ACA"
 fi
 
-# adicional: documentacion y burocracia a dropbox. osea doc y buroc tiene upstream a sd y a dropbox; ambos no son más que copias y edito todo desde compu
+# documentacion y burocracia rsync a dropbox. osea dyb tiene de origin a sd y de upstream de rsync a dropbox
 echo "######################################### documentacion y burocracia a dropbox"
-rsync -av --delete "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
+rsync -av --delete --inplace --exclude='.git' "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
 
-if [ -z "$(ls -A "$iphone_apps")" ]; then
- echo "iphone no está en /run/user/1000/gvfs/afc:host=00008101-000C69A93683001E,port=3/"
-else
- echo "######################################### rsync french a iphone_apps vlc"
- rsync -av --delete --inplace "$HOME/french" "$iphone_apps/org.videolan.vlc-ios/"
-fi
+# el file .md rsynceado desde el repo $TODO hasta dropbox
+rsync -av --delete "$TODO/metaTODO.md" "$HOME/Dropbox/metaTODO.md"
+
+# if [ -z "$(ls -A "$iphone_apps")" ]; then
+#  echo "iphone no está en /run/user/1000/gvfs/afc:host=00008101-000C69A93683001E,port=3/"
+# else
+#  echo "######################################### rsync french a iphone_apps vlc"
+#  rsync -av --delete --inplace "$HOME/french" "$iphone_apps/org.videolan.vlc-ios/"
+# fi
 
 # }}}
 

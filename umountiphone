@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+st -e sudo umount $iphone_apps
+fusermount -u $iphone

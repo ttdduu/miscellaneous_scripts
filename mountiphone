@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+
+ifuse $iphone
+idevicepair pair
+st -e vifm $iphone
