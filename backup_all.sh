@@ -77,7 +77,8 @@ if [ -z "$(ls -A "$sd")" ]; then
 else
 	for dir in "${dirs_para_sd[@]}"; do
 		echo "######################################### rsync $dir a sd"
-		rsync -av --delete --inplace "$dir" "$sd/"
+		#rsync -av --delete --inplace "$dir" "$sd/"
+		rsync -av --inplace "$dir" "$sd/"
 	done
 	#rsync -av $HOME/wiki $sd/
 fi
