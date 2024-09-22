@@ -4,4 +4,4 @@
 #st -e bspc desktop -f 9 && st -e nvim -S $todo/calendario_con_brain_dump.mks
 
 # solo el calendario como haría un neurotípico
-st -e bspc desktop -f 9 && st -e nvim $TODO/metaTODO.md
+st -e bspc desktop -f 1 && st -e nvim $H/metaTODO.md

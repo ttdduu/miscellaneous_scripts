@@ -24,7 +24,7 @@ echo "######################################### repos"
 commit_message="Automatic weekly commit message"
 
 # List of repositories
-repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles" "/home/ttdduu/documentacion_y_burocracia" "/home/ttdduu/metaTODO")
+repos=("/home/ttdduu/code/miscellaneous_scripts" "/home/ttdduu/dotfiles")
 
 # Function to add, commit, and push changes if there are uncommitted changes
 function commit_and_push {
@@ -93,10 +93,10 @@ fi
 
 # documentacion y burocracia rsync a dropbox. osea dyb tiene de origin a sd y de upstream de rsync a dropbox
 echo "######################################### documentacion y burocracia a dropbox"
-rsync -av --delete --inplace --exclude='.git' "$HOME/documentacion_y_burocracia" "$HOME/Dropbox/"
+rsync -av --delete --inplace --exclude='.git' "$HOME/dyb" "$HOME/Dropbox/"
 
 # el file .md rsynceado desde el repo $TODO hasta dropbox
-rsync -av --delete "$TODO/metaTODO.md" "$HOME/Dropbox/metaTODO.md"
+rsync -av --delete "$H/metaTODO.md" "$HOME/Dropbox/metaTODO.md"
 
 # if [ -z "$(ls -A "$iphone_apps")" ]; then
 #  echo "iphone no está en /run/user/1000/gvfs/afc:host=00008101-000C69A93683001E,port=3/"

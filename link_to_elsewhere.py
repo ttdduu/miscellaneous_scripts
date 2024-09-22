@@ -183,7 +183,7 @@ if ".mks" in link_entero:
 if "." not in link_entero[link_entero.rfind("/") + 1 :]:
     to_vifm()
 
-if ".md" in link_entero and link_entero[0] != "_":
+if ".md" or ".py" in link_entero and link_entero[0] != "_":
     to_nvim()
 
 # TODO problemas cuando en _quote_ pagenumber [[link]] hay un [[link]] en la línea
